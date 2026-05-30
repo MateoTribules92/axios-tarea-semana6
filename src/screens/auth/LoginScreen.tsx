@@ -15,6 +15,8 @@ import { isValidEmail, isValidPassword } from "../../utils/validators";
 import { loginStyles } from "../../styles/appStyle";
 import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
+import { FirebaseError } from "firebase/app";
+import { loginWithEmail } from "../../services/authService";
 
 type LoginScreenNavigationProp = StackScreenProps<AuthStackParamList, "Login">;
 
@@ -46,6 +48,29 @@ export const LoginScreen = ({ navigation }: LoginScreenNavigationProp) => {
       valid = false;
     }
     return valid;
+  };
+
+  //funcion para iniciar sesison
+  const handleLogin = async ()=>{
+    if(!validate()) return;
+    try{
+      setLoading(true);
+      await loginWithEmail({
+        email: loginForm.email,
+        password: loginForm.password
+      });
+    }catch(error){
+      if(error instanceof FirebaseError){
+              console.log(error);
+                const msg= 
+                error.code === "auth/invalid-credential"
+                ? "Email o contraseña incorrectos."
+                : "Error al iniciar. Intenta mas tarde.";
+                Alert.alert("Error", msg);
+      }
+    }finally{
+      setLoading(false);
+    }
   };
 
   return (
@@ -82,7 +107,7 @@ export const LoginScreen = ({ navigation }: LoginScreenNavigationProp) => {
           />
           <Button
             title="Iniciar Sesión"
-            onPress={()=>{}}
+            onPress={handleLogin}
             loading={loading}
             style={loginStyles.button}
           />

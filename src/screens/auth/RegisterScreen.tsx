@@ -85,9 +85,8 @@ export const RegisterScreen = ({
           Alert.alert("Error", msg);
         
       }
-
-
-
+    }finally{
+      setLoading(false);
     }
   }
 
