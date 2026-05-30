@@ -5,6 +5,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
 import { AuthStackParamList } from "../../navigation/typeNavigation";
@@ -17,6 +18,8 @@ import { registerStyles } from "../../styles/appStyle";
 import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
 import { RegisterForm } from "../../types/auth";
+import { registWithEmail } from "../../services/authService";
+import { FirebaseError } from "firebase/app";
 
 type RegisterScreenNavigationProp = StackScreenProps<
   AuthStackParamList,
@@ -62,6 +65,32 @@ export const RegisterScreen = ({
     return valid;
   };
 
+  //Funcion para registar un usuario
+  const handlRegister = async()=>{
+    if(!validate()) return;
+    try{
+      setLoading(true);
+      await registWithEmail({
+        email:registerForm.email,
+        password: registerForm.password,
+        confirmPassword: registerForm.confirmPassword
+      });
+    }catch(error){
+      if(error instanceof FirebaseError){
+        console.log(error);
+          const msg= 
+          error.code === "auth/email-already-in-use"
+          ? "Este email ya se encuentra registrado"
+          : "Error al registrarse. Intenta mas tarde.";
+          Alert.alert("Error", msg);
+        
+      }
+
+
+
+    }
+  }
+
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
@@ -104,7 +133,7 @@ export const RegisterScreen = ({
           />
           <Button
             title="Registrarse"
-            onPress={() => {}}
+            onPress={handlRegister}
             loading={loading}
             style={registerStyles.button}
           />
