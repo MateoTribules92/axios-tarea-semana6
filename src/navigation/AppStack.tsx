@@ -28,7 +28,7 @@ const AppStack = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Detail"
+        name="CountryDetail"
         component={DetailScreen}
         options={({ route }) => ({
           title: "Detalle del Post",

@@ -93,6 +93,18 @@ export const homeStyles = StyleSheet.create({
   },
   errorEmoji: { fontSize: 56, marginBottom: 12 },
   errorText: { fontSize: 16, color: "#718096", textAlign: "center" },
+  countriesBtn: {
+  backgroundColor: '#4F46E5',
+  borderRadius: 10,
+  padding: 12,
+  alignItems: 'center',
+  marginBottom: 16,
+},
+countriesBtnText: {
+  color: '#fff',
+  fontWeight: '600',
+  fontSize: 15,
+},
 });
 
 export const detailStyles = StyleSheet.create({
@@ -216,4 +228,61 @@ export const inputStyles = StyleSheet.create({
   eyeIcon: { position: "absolute", right: 14, top: 12 },
   eyeText: { fontSize: 20 },
   errorText: { fontSize: 12, color: "#E53E3E", marginTop: 4 },
+});
+export const countryCardStyles = StyleSheet.create({
+  card: {
+    flexDirection: 'row',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    padding: 12,
+    marginBottom: 12,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  flag: {
+    width: 72,
+    height: 46,
+    borderRadius: 8,
+    marginRight: 12,
+    backgroundColor: '#EEF2FF',
+  },
+  info: { flex: 1 },
+  name: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#1A202C',
+    marginBottom: 4,
+  },
+  sub: {
+    fontSize: 13,
+    color: '#718096',
+    marginTop: 2,
+  },
+  noResults: {
+    textAlign: 'center',
+    marginTop: 40,
+    color: '#718096',
+    fontSize: 16,
+  },
+});
+
+export const searchStyles = StyleSheet.create({
+  container: {
+    marginHorizontal: 20,
+    marginBottom: 12,
+  },
+  input: {
+    height: 50,
+    borderWidth: 1.5,
+    borderColor: '#E2E8F0',
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    fontSize: 15,
+    color: '#2D3748',
+    backgroundColor: '#FFFFFF',
+  },
 });
